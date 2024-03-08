@@ -29,7 +29,7 @@ This mod is client-side, meaning only you need to have it installed so it works 
 
 ## Support
 
-If you encounter any issues or have suggestions, please visit our [GitHub Issues Page](https://github.com/MasterAli2/TeleportDecline/issues) or reach out on the [Discord Release Forum]().
+If you encounter any issues or have suggestions, please visit our [GitHub Issues Page](https://github.com/MasterAli2/TeleportDecline/issues) or reach out on the [Discord Release Forum](https://discord.com/channels/1168655651455639582/1215808576883392693).
 
 ## ScreenShots
 
