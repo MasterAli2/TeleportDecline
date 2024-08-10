@@ -8,22 +8,22 @@ using UnityEngine;
 using LethalCompanyInputUtils;
 using LethalCompanyInputUtils.Api;
 
-using System;
 namespace TeleportDecline
 {
-    [BepInPlugin(modGUID, modName, modVersion)]
 
-    [BepInDependency(LethalCompanyInputUtilsPlugin.ModId, BepInDependency.DependencyFlags.HardDependency)]
+    [BepInPlugin(GUID, NAME, VERSION)]
+    [BepInDependency("com.rune580.LethalCompanyInputUtils", BepInDependency.DependencyFlags.HardDependency)]
     public class TeleportDeclineBase : BaseUnityPlugin
     {
-        public const string modGUID = "MasterAli2.TeleportDecline";
-        public const string modName = "Teleport Decline";
-        public const string modVersion = "0.0.1";
+        public const string GUID = "MasterAli2.TeleportDecline";
+        public const string NAME = "Teleport Decline";
+        public const string VERSION = "1.0.2";
+        public const string AUTHOR = "MasterAli2";
 
-        private readonly Harmony harmony = new Harmony(modGUID);
-        internal ManualLogSource? mls;
+        private readonly Harmony harmony = new Harmony(GUID);
+        internal ManualLogSource mls;
 
-        public static TeleportDeclineBase? instance;
+        public static TeleportDeclineBase instance;
 
         public bool isTeleporting = false;
         public bool declineTeleport = false;
@@ -49,21 +49,23 @@ namespace TeleportDecline
             TeleportDeclineInputClass.instance.DeclineKey.performed += DeclineTeleport;
             ApplyPatches();
 
-            mls.LogInfo(modName + "Loaded!");
-
+            mls.LogInfo($"{GUID} v{VERSION} has loaded!");
         }
 
         void ApplyPatches()
         {
             harmony.PatchAll(typeof(TeleportDeclineBase));
             harmony.PatchAll(typeof(Patches.Patch));
+            mls.LogInfo("Applied Patches!");
         }
 
 
         public void DeclineTeleport(InputAction.CallbackContext context)
         {
-            if (declieneAudio == null) declieneAudio = UnityEngine.Object.FindObjectOfType<Terminal>().leaveTerminalSFX;
             if (!context.performed || !isTeleporting) return;
+            if (declieneAudio == null) declieneAudio = UnityEngine.Object.FindObjectOfType<Terminal>().leaveTerminalSFX;
+
+            mls.LogInfo("Stopping teleport!");
 
             declineTeleport = true;
             StartOfRound.Instance.localPlayerController.beamUpParticle.Stop();
@@ -76,14 +78,11 @@ namespace TeleportDecline
         }
     }
 
-
     public class TeleportDeclineInputClass : LcInputActions
     {
         public static TeleportDeclineInputClass instance = new();
 
         [InputAction("<Keyboard>/h", Name = "Decline Teleport")]
         public InputAction DeclineKey { get; set; }
-
-
     }
 }
