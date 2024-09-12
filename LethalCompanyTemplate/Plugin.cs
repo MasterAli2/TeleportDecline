@@ -26,13 +26,7 @@ namespace TeleportDecline
         public static TeleportDeclineBase instance;
 
         public bool isTeleporting = false;
-        public bool declineTeleport = false;
-
-        public bool wasInElevator;
-        public bool wasInHangarShipRoom;
-        public bool wasInsideFactory;
-        public float oldAverageVelocity;
-        public Vector3 oldVelocityLastFrame;
+        public ShipTeleporter teleporter;
 
         public AudioClip? declieneAudio;
 
@@ -54,9 +48,8 @@ namespace TeleportDecline
 
         void ApplyPatches()
         {
-            harmony.PatchAll(typeof(TeleportDeclineBase));
+            mls.LogInfo("Patching...");
             harmony.PatchAll(typeof(Patches.Patch));
-            mls.LogInfo("Applied Patches!");
         }
 
 
@@ -67,7 +60,6 @@ namespace TeleportDecline
 
             mls.LogInfo("Stopping teleport!");
 
-            declineTeleport = true;
             StartOfRound.Instance.localPlayerController.beamUpParticle.Stop();
 
             HUDManager.Instance.tipsPanelBody.text = "Declining teleport...";
@@ -75,6 +67,8 @@ namespace TeleportDecline
             StartOfRound.Instance.localPlayerController.movementAudio.PlayOneShot(declieneAudio);
             WalkieTalkie.TransmitOneShotAudio(StartOfRound.Instance.localPlayerController.movementAudio, declieneAudio);
 
+            isTeleporting = false;
+            teleporter.StopCoroutine(teleporter.beamUpPlayerCoroutine);
         }
     }
 
