@@ -47,22 +47,20 @@ namespace TeleportDecline
         {
             mls.LogInfo("Patching...");
             harmony.PatchAll(typeof(Patches.Patch));
+            mls.LogInfo("Patched...");
         }
 
         public void DeclineTeleport(InputAction.CallbackContext context)
         {
             if (!context.performed || !isTeleporting) return;
 
-            mls.LogInfo("Stopping teleport!");
-
             StartOfRound.Instance.localPlayerController.beamUpParticle.Stop();
             HUDManager.Instance.tipsPanelBody.text = "Declining teleport...";
 
-            
             teleporter.StopCoroutine(teleporter.beamUpPlayerCoroutine);
 
-            TeleportDeclineNetcode.DeclineTeleportClientRpc();
-            isTeleporting = false;
+            TeleportDeclineNetcode.DeclineTeleportServerRpc();
+            mls.LogInfo("Stopped teleport!");
         }
     }
 
@@ -83,6 +81,14 @@ namespace TeleportDecline
             if (TeleportDeclineBase.instance.isTeleporting || !StartOfRound.Instance.localPlayerController.isInHangarShipRoom) return;
             
             HUDManager.Instance.DisplayTip("Teleport Decline", "That teleport got declined");
+
+            if (TeleportDeclineBase.instance.isTeleporting)
+            {
+                TeleportDeclineBase.instance.isTeleporting = false;
+            }
         }
+
+        [ServerRpc]
+        public static void DeclineTeleportServerRpc() => DeclineTeleportClientRpc();
     }
 }

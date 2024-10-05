@@ -15,6 +15,7 @@ namespace TeleportDecline.Patches
                 return;
 
             HUDManager.Instance.DisplayTip("Teleporting!", "Press " + TeleportDeclineInput.instance.DeclineKey.GetBindingDisplayString().Split("|")[0] + "to stop teleport");
+
             TeleportDeclineBase.instance.isTeleporting = true;
             TeleportDeclineBase.instance.teleporter = __instance;
         }

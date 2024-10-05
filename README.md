@@ -6,6 +6,7 @@ Teleport Decline is a mod for Lethal Company that enables you to prevent/decline
 Ensure that you have the following dependencies installed:
 
 - [Lethal Company Input Utils](https://thunderstore.io/c/lethal-company/p/Rune580/LethalCompany_InputUtils/) (version 0.6.3 or higher)
+- [Static Netcode Lib](https://thunderstore.io/c/lethal-company/p/xilophor/StaticNetcodeLib/) (version 1.1.1 or higher)
 
 ## Usage/Examples
 
@@ -16,20 +17,11 @@ To decline the teleport, press the 'H' key (default keybind), and a new popup wi
 Default keybind for declining: H
 
 This mod is client-side, meaning only you need to have it installed so it works for you.
-## Installation
-
-### Using r2modman or thunderstore Client
-
-1. Install the Teleport Decline mod.
-
-### Using the Manual Download Method
-
-1. Download the Teleport Decline mod and its dependencies.
-2. Extract the ZIP files into your BepInEx directory.
 
 ## Support
 
-If you encounter any issues or have suggestions, please visit our [GitHub Issues Page](https://github.com/MasterAli2/TeleportDecline/issues) or reach out on the [Discord Release Forum](https://discord.com/channels/1168655651455639582/1215808576883392693).
+If you encounter any issues or have suggestions, please visit our [GitHub Issues Page](https://github.com/MasterAli2/TeleportDecline/issues)
+or reach out on the [Discord Release Forum](https://discord.com/channels/1168655651455639582/1215808576883392693)  in the [Lethal Company Modding Server](https://discord.gg/lcmod).
 
 ## ScreenShots
 
@@ -47,7 +39,9 @@ If you wish to contribute to this project, please fork the repository and submit
 
 ## Credits
 
-_Hect1c - Mod Idea
+Mod Idea by _Hect1c
+
+Icon by [pedro9006](https://discord.com/channels/1168655651455639582/1213589008429486141/1213589008429486141)
 
 ## License
 
